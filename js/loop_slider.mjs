@@ -1,12 +1,14 @@
 import Animate from './animate.mjs';
 
 const slider = document.querySelector('#slider');
+const slider2 = document.querySelector('#slider2');
 const prev = slider.querySelector('.prev');
 const next = slider.querySelector('.next');
 const speed = 500;
 let enableClick = true;
 
 init(slider);
+init(slider2);
 
 next.addEventListener('click', e=>{
     e.preventDefault();
@@ -14,6 +16,7 @@ next.addEventListener('click', e=>{
     if(enableClick){
         enableClick = false;
         nextSlide(slider);
+        nextSlide(slider2);
     }    
 })
 
@@ -23,6 +26,7 @@ prev.addEventListener('click', e=>{
     if(enableClick){
         enableClick = false;
         prevSlide(slider);
+        prevSlide(slider2);
     }    
 })
 

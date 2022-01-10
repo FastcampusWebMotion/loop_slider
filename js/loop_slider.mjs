@@ -1,21 +1,19 @@
 import Animate from './animate.mjs';
 
 const slider = document.querySelector('#slider');
-const ul = slider.querySelector('ul');
 const prev = slider.querySelector('.prev');
 const next = slider.querySelector('.next');
-const speed = 2000;
+const speed = 500;
 let enableClick = true;
 
-ul.style.left = '-100%';
-ul.prepend(ul.lastElementChild);
+init(slider);
 
 next.addEventListener('click', e=>{
     e.preventDefault();
 
     if(enableClick){
         enableClick = false;
-        nextSlide();
+        nextSlide(slider);
     }    
 })
 
@@ -24,12 +22,22 @@ prev.addEventListener('click', e=>{
 
     if(enableClick){
         enableClick = false;
-        prevSlide();
-    }
-    
+        prevSlide(slider);
+    }    
 })
 
-function nextSlide(){
+function init(frame){
+    const ul = frame.querySelector('ul');
+    const lis = ul.querySelectorAll('li');
+    const len = lis.length;
+    ul.style.left = '-100%';
+    ul.style.width = `${100*len}%`;
+    lis.forEach(li=>li.style.width=`${100/len}%`)
+    ul.prepend(ul.lastElementChild);
+}
+
+function nextSlide(frame){
+    const ul = frame.querySelector('ul');
     new Animate(ul,{
         prop: 'left',
         value: '-200%',
@@ -42,7 +50,8 @@ function nextSlide(){
     })
 }
 
-function prevSlide(){
+function prevSlide(frame){
+    const ul = frame.querySelector('ul');
     new Animate(ul, {
         prop: 'left',
         value: '0%',
